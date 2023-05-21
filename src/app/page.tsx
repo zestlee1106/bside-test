@@ -53,7 +53,7 @@ export default function Home() {
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            뭔가 테스트로 실행해보자231232394023
+            뭔가 테스트로 x
           </p>
         </a>
 
