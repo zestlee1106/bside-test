@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  node-koa-server:
+     image: node-koa-server-docker-image
+     volumes:
+          - /home/ubuntu/deploy/node-koa-server:/deploy/node-koa-server
+     ports:
+          - "3000:3000"
