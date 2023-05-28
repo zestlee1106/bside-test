@@ -37,10 +37,10 @@ jobs:
           password: ${{ secrets.NCP_SERVER_PASSWORD }}
           port: ${{ secrets.NCP_SERVER_PORT }}
           env:
-            DOCKER_USERNAME: ${{ secrets.NCP_NCR_ACCESS_KEY }}
-            DOCKER_PASSWORD: ${{ secrets.NCP_NCR_SECRET_KEY }}
+            NCP_NCR_ACCESS_KEY: ${{ secrets.NCP_NCR_ACCESS_KEY }}
+            NCP_NCR_SECRET_KEY: ${{ secrets.NCP_NCR_SECRET_KEY }}
           script: |
-            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin ${{ secrets.NCP_NCR }}
+            echo $NCP_NCR_SECRET_KEY | docker login -u $NCP_NCR_ACCESS_KEY --password-stdin ${{ secrets.NCP_NCR }}
             docker pull ${{ secrets.NCP_NCR }}/nextjs-docker:latest
             if [[ $(docker ps -q) ]]; then
               docker stop $(docker ps -q)
