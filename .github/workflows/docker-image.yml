@@ -37,6 +37,7 @@ jobs:
           password: ${{ secrets.NCP_SERVER_PASSWORD }}
           port: ${{ secrets.NCP_SERVER_PORT }}
           script: |
+            docker login -u ${{ secrets.NCP_NCR_ACCESS_KEY }} -p ${{ secrets.NCP_NCR_SECRET_KEY }} ${{ secrets.NCP_NCR }}
             docker pull ${{ secrets.NCP_NCR }}/nextjs-docker:latest
             docker stop $(docker ps -a -q)
             docker rm $(docker ps -a -q)
