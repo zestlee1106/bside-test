@@ -13,6 +13,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Change directory
+        run: cd bside-test
+
       - name: SSH into NCP instance
         uses: appleboy/ssh-action@master
         with:
