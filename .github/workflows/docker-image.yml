@@ -37,9 +37,13 @@ jobs:
           password: ${{ secrets.NCP_SERVER_PASSWORD }}
           port: ${{ secrets.NCP_SERVER_PORT }}
           script: |
-            docker login -u ${{ secrets.NCP_NCR_ACCESS_KEY }} -p ${{ secrets.NCP_NCR_SECRET_KEY }} ${{ secrets.NCP_NCR }}
+            echo "${{ secrets.NCP_NCR_SECRET_KEY }}" | docker login -u "${{ secrets.NCP_NCR_ACCESS_KEY }}" --password-stdin ${{ secrets.NCP_NCR }}
             docker pull ${{ secrets.NCP_NCR }}/nextjs-docker:latest
-            docker stop $(docker ps -a -q)
-            docker rm $(docker ps -a -q)
+            if [[ $(docker ps -q) ]]; then
+              docker stop $(docker ps -q)
+              docker rm $(docker ps -aq)
+            else
+              echo "No running containers found."
+            fi
             docker run -d -p 3000:3000 --name nextjs-docker ${{ secrets.NCP_NCR }}/nextjs-docker:latest
             docker image prune -f
