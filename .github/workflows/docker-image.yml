@@ -24,6 +24,9 @@ jobs:
           # Add any additional SSH configuration here if needed
 
           script: |
+            # Change directory to the project root
+            cd $GITHUB_WORKSPACE
+
             # Stop and remove existing containers (if running)
             docker-compose down
 
