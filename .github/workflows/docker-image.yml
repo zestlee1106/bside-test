@@ -29,7 +29,7 @@ jobs:
           password: ${{ secrets.NCP_SERVER_PASSWORD }}
           port: ${{ secrets.NCP_SERVER_PORT }}
           source: docker-compose.yml
-          target: /path/to/docker-compose.yml
+          target: /path/to
 
       - name: SSH into NCP instance
         uses: appleboy/ssh-action@master
