@@ -13,6 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+    steps:
       - name: SSH into NCP instance
         uses: appleboy/ssh-action@master
         with:
