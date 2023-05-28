@@ -13,8 +13,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Build Docker Compose
+        run: |
+          # Build Docker Compose
+          docker-compose build
+
       - name: List directory contents
         run: ls
+
+      - name: Transfer Docker Compose to NCP server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.NCP_SERVER_IP }}
+          username: ${{ secrets.NCP_SERVER_USERNAME }}
+          password: ${{ secrets.NCP_SERVER_PASSWORD }}
+          port: ${{ secrets.NCP_SERVER_PORT }}
+          source: docker-compose.yml
+          target: /path/to/docker-compose.yml
 
       - name: SSH into NCP instance
         uses: appleboy/ssh-action@master
@@ -23,14 +38,9 @@ jobs:
           username: ${{ secrets.NCP_SERVER_USERNAME }}
           password: ${{ secrets.NCP_SERVER_PASSWORD }}
           port: ${{ secrets.NCP_SERVER_PORT }}
-
-          # Add any additional SSH configuration here if needed
           script: |
-            # Stop and remove existing containers (if running)
-            docker-compose -f /path/to/docker-compose.yml down
+            # Change directory to where Docker Compose is located
+            cd /path/to
 
-            # Pull the latest code changes
-            git pull origin main
-
-            # Build and start the services defined in Docker Compose file
-            docker-compose -f /path/to/docker-compose.yml up -d
+            # Start containers using the transferred Docker Compose file
+            docker-compose up -d
