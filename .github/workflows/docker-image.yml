@@ -21,14 +21,9 @@ jobs:
           password: ${{ secrets.NCP_NCR_SECRET_KEY }}
 
       - name: Build and Push Docker image
-        run: |
-          docker-compose -f docker-compose.yml build
-          docker-compose -f docker-compose.yml push
-        env:
-          DOCKER_BUILDKIT: 1
-          COMPOSE_DOCKER_CLI_BUILD: 1
+        run: docker-compose -f docker-compose.yml build && docker-compose -f docker-compose.yml push
 
-      - name: Connect ssh
+      - name: connect ssh
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.NCP_SERVER_IP }}
