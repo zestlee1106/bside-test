@@ -25,7 +25,7 @@ jobs:
 
           script: |
             # Change directory to the project root
-            cd $GITHUB_WORKSPACE
+            cd /usr/bin/git
 
             # Stop and remove existing containers (if running)
             docker-compose down
