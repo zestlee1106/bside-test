@@ -25,12 +25,12 @@ jobs:
           port: ${{ secrets.NCP_SERVER_PORT }}
 
           # Add any additional SSH configuration here if needed
+          script: |
+            # Stop and remove existing containers (if running)
+            docker-compose -f /path/to/docker-compose.yml down
 
-      - name: Stop and remove existing containers
-        run: docker-compose -f docker-compose.yml down
+            # Pull the latest code changes
+            git pull origin main
 
-      - name: Pull the latest code changes
-        run: git pull origin main
-
-      - name: Build and start the services
-        run: docker-compose -f docker-compose.yml up -d
+            # Build and start the services defined in Docker Compose file
+            docker-compose -f /path/to/docker-compose.yml up -d
