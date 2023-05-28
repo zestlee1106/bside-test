@@ -22,7 +22,7 @@ jobs:
         run: ls
 
       - name: Transfer Docker Compose to NCP server
-        uses: appleboy/scp-action@v1
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.NCP_SERVER_IP }}
           username: ${{ secrets.NCP_SERVER_USERNAME }}
