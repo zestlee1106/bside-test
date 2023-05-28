@@ -1,9 +1,11 @@
-version: '2'
+version: "3.6"
 
 services:
-  node-koa-server:
-     image: node-koa-server-docker-image
-     volumes:
-          - /home/ubuntu/deploy/node-koa-server:/deploy/node-koa-server
-     ports:
-          - "3000:3000"
+  front-service:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - HOST=0.0.0.0
+    ports:
+      - "3000:3000"
