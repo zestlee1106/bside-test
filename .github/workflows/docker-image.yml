@@ -34,5 +34,5 @@ jobs:
             docker pull ${{ secrets.NCP_NCR }}/nextjs-docker:latest
             docker stop $(docker ps -a -q)
             docker rm $(docker ps -a -q)
-            docker run -d -p 80:3000 --name nextjs-docker ${{ secrets.NCP_NCR }}/nextjs-docker:latest
+            docker run -d -p 3000:3000 --name nextjs-docker ${{ secrets.NCP_NCR }}/nextjs-docker:latest
             docker image prune -f
