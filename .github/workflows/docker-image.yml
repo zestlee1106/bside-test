@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.NCP_NCR_SECRET_KEY }}
 
       - name: Push Docker image
-        run: docker push ${{ secrets.NCP_CONTAINER_REGISTRY }}/nextjs-docker:latest
+        run: docker push ${{ secrets.NCP_NCR }}/nextjs-docker:latest
 
       - name: Connect ssh
         uses: appleboy/ssh-action@master
